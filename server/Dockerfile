@@ -5,35 +5,14 @@ ENV PYTHONFAULTHANDLER=1 \
 
 RUN apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-        apt-transport-https \
         build-essential \
-        ca-certificates \
-        curl \
         git \
-        gnupg \
-        jq \
         less \
-        libpcre3 \
-        libpcre3-dev \
-        openssh-client \
         telnet \
         unzip \
         vim \
-        wait-for-it \
         wget \
-    && apt-get clean \
-    && rm -rf /var/cache/apt/archives/* \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && truncate -s 0 /var/log/*log
-
-RUN  \
-  echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/nodesource.list \
-  && wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
-RUN apt-get update -qq \
-    &&  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-         nodejs \
-         postgresql-client-12 \
+        curl \
     && apt-get clean \
     && rm -rf /var/cache/apt/archives/* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
