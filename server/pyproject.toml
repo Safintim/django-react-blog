@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "blog"
+version = "0.1.0"
+description = ""
+authors = ["Timur Safin <timurtlt96@mail.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^3.2.9"
+uWSGI = "^2.0.20"
+psycopg2-binary = "^2.9.1"
+djangorestframework = "^3.12.4"
+
+[tool.poetry.dev-dependencies]
+pytest-django = "^4.4.0"
+isort = "^5.10.0"
+wemake-python-styleguide = "^0.15.3"
+coverage = {extras = ["toml"], version = "^6.1.1"}
+mypy = "^0.910"
+django-stubs = "^1.9.0"
+djangorestframework-stubs = "^1.4.0"
+factory-boy = "^3.2.1"
+
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = true
+
+[tool.coverage.run]
+omit = [
+  "**/migrations/*",
+  "**/tests/*",
+  "manage.py",
+  "**/models/*",
+  "**/settings.py",
+  "**/admin.py"
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
