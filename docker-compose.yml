@@ -1,8 +1,5 @@
 version: "3.7"
 
-x-web-volumes: &web-volumes
-  - ./server:/app:cached
-  - ~/.zsh_history:/root/.bash_history
 
 x-db-config: &db-config
   DATABASE_NAME: postgres
@@ -26,25 +23,31 @@ services:
       - db
     ports:
       - "8000:8000"
-    volumes: *web-volumes
+    volumes:
+      - ./server:/app:cached
+      - ~/.zsh_history:/root/.bash_history
     stdin_open: true
     tty: true
+
   db:
     image: postgres:12.5-alpine
     environment: *db-config
     logging:
       driver: none
     ports:
-      - "5432:5432"
+      - "5433:5432"
+
   frontend:
     build:
       context: ./client
       dockerfile: Dockerfile
+      
     volumes:
       - ./client:/app:cached
       - ~/.zsh_history:/root/.bash_history
+      - notused:/app/node_modules
     ports:
-      - "3000:3000"
+      - "4000:4000"
     depends_on:
       - api
     command: npm start
@@ -53,3 +56,4 @@ services:
 
 volumes:
   sqlvolume:
+  notused:
